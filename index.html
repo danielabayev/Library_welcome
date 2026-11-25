@@ -19,7 +19,8 @@
           font:700 1.6rem/1.2 ui-monospace, Consolas, monospace; letter-spacing:.12em; color:var(--fg); }
   a.button { display:block; margin:16px 0 4px; padding:14px; border-radius:12px; background:var(--accent); color:var(--on-accent);
              font-weight:600; text-decoration:none; }
-  [hidden] { display:none; }
+  a.button.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  [hidden] { display:none !important; }
 </style>
 </head>
 <body>
@@ -29,21 +30,39 @@
     <p>Your invite code</p>
     <div class="code" id="code"></div>
     <a class="button" id="open" href="#">Open in the app</a>
-    <p>Nothing happened? Install My Library, open the <b>Friends and family</b> tab and type the code above in <b>Invite code</b>.</p>
+    <a class="button secondary" id="install" href="#" hidden>Install the app</a>
+    <p>Nothing happened? Make sure My Library is installed and open this page in Chrome (not inside WhatsApp or another app). Or open the <b>Friends and family</b> tab in the app and type the code above in <b>Invite code</b>.</p>
   </div>
   <div id="no-code" hidden>
     <p>This invitation link has no valid invite code. Ask for a new one.</p>
   </div>
 </main>
 <script>
+  // Where to send people who do not have the app yet (a Play Store link once the app is published).
+  // Leave empty to show install instructions only.
+  var INSTALL_URL = "";
+  var APP_ID = "com.mylibrary.app";
+
   var raw = new URLSearchParams(location.search).get("code") || "";
   var code = raw.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8);
   if (code) {
-    var link = "mylibrary://join?code=" + code;
+    var scheme = "mylibrary://join?code=" + code;
+    // On Android an intent: link opens the app when it is installed and falls back to the install page otherwise;
+    // it is more reliable than the bare scheme in Chrome.
+    var link = scheme;
+    if (/Android/i.test(navigator.userAgent)) {
+      link = "intent://join?code=" + code + "#Intent;scheme=mylibrary;package=" + APP_ID + ";" +
+        (INSTALL_URL ? "S.browser_fallback_url=" + encodeURIComponent(INSTALL_URL) + ";" : "") + "end";
+    }
     document.getElementById("code").textContent = code;
     document.getElementById("open").href = link;
+    if (INSTALL_URL) {
+      var install = document.getElementById("install");
+      install.href = INSTALL_URL;
+      install.hidden = false;
+    }
     document.getElementById("with-code").hidden = false;
-    // Try the app straight away; if it is not installed the page simply stays.
+    // Browsers usually allow this only after a tap, so the button above is the reliable way in.
     setTimeout(function () { location.href = link; }, 300);
   } else {
     document.getElementById("no-code").hidden = false;
