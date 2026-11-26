@@ -14,12 +14,25 @@
 <tr><th>Information</th><th>Why</th></tr>
 <tr><td><strong>Account details</strong> - your Google account email, display name and a user id, received when you sign in with Google.</td><td>To sign you in, show who you are to people you share with, and let you find friends by email.</td></tr>
 <tr><td><strong>Library content</strong> - books (title, author, year, ISBN, cover link, reading status, rating, personal notes, who borrowed it), groups of books, and your wishlist.</td><td>This is the core function of the app. It is stored in your account so it syncs between devices.</td></tr>
-<tr><td><strong>Sharing and social data</strong> - households you create or join, people you share your library with, borrow requests, and gift claims on wishlist items.</td><td>To let family and friends see your library, ask to borrow books and coordinate gifts. The owner of a wishlist item never sees who claimed it, so gifts stay a surprise.</td></tr>
-<tr><td><strong>Camera images</strong> - barcode scans, and shelf photos you choose to scan.</td><td>Barcodes are read on your device. A shelf photo is sent once to our server and on to Google's Gemini service to recognise the books on it. <strong>We do not store the photo.</strong> Google handles it under the <a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a>: it may keep it for a limited time, and depending on the service tier may use it to improve its products, including with human review. Photograph only your books, with no people or personal documents.</td></tr>
+<tr><td><strong>Sharing and social data</strong> - households you create or join, people you share your library with, borrow requests, gift claims on wishlist items, and the times of wrong household invite codes (to limit guessing; removed after about a day or later, when the limit is next used).</td><td>To let family and friends see your library, ask to borrow books and coordinate gifts. The owner of a wishlist item never sees who claimed it, so gifts stay a surprise.</td></tr>
+<tr><td><strong>Camera images</strong> - barcode scans, and shelf photos you choose to scan.</td><td>Barcodes are read on your device. A shelf photo is sent once to our server and on to Google's Gemini service to recognise the books on it. <strong>We do not store the photo unless you choose to share it</strong> (see <a href="#shared-photos">Shelf photos you choose to share</a>). Google handles it under the <a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a>: it may keep it for a limited time, and depending on the service tier may use it to improve its products, including with human review. Photograph only your books, with no people or personal documents.</td></tr>
+<tr><td><strong>Number of scans</strong></td><td>During the test period we count how many shelf photos each account sends to be scanned, to understand usage and cost. Only the number is kept, not the photos or their results, and it is deleted with your account.</td></tr>
 <tr><td><strong>Search terms and ISBNs</strong> you look up.</td><td>Sent to our server and on to Google Books and Open Library to fetch book details and covers.</td></tr>
 <tr><td><strong>Reading reminder settings</strong> and your chosen theme.</td><td>Stored only on your device. Reminders are local notifications; no data is sent anywhere.</td></tr>
 </table>
 <p>We do not collect your location, contacts, advertising id, or device identifiers for tracking.</p>
+
+<h2 id="shared-photos">Shelf photos you choose to share</h2>
+<p>This is optional and nothing happens without your consent. If you edit or skip at least 10% of the books you review from a scan, the app may ask whether we can keep that photo. It shows you the photo and asks every time. Saying no changes nothing in the app.</p>
+<table>
+<tr><th>What we keep</th><td>The photo; what the scan detected for each book (title, author, year, ISBN); whether you kept, edited, skipped or did not review it; your corrected title, author, year and ISBN; the name of the model used; the version of the consent text; and the date. It is linked to your account so that you can delete it. Your reading status, ratings, notes and groups are not included. The app re-saves the photo before sending it, and our server removes any remaining photo metadata such as location and camera details.</td></tr>
+<tr><th>Why</th><td>Only to measure how well the scan works and to compare AI models, so we can find one that reads shelves better. <strong>We do not use shared photos to train AI models</strong>, for advertising, or for any other purpose. If that ever changes, we will ask you again first.</td></tr>
+<tr><th>Who can see it</th><td>The people who maintain the app may view it. To compare models we may send it to AI model providers, who process it under their own terms. Other users of the app cannot see it. We do not sell it.</td></tr>
+<tr><th>Security</th><td>It is kept in private storage that app users cannot read directly. Access goes through our server, and it is encrypted in transit.</td></tr>
+<tr><th>Limits</th><td>At most 3 shared photos per user at a time. Each is deleted automatically 12 months after you share it; a daily job does the removal.</td></tr>
+<tr><th>Your control</th><td>Delete all your shared photos at any time in <em>Settings &rarr; Delete my shared photos</em>, which withdraws your consent for them. You can turn the question off there or with "Don't ask again". Deleting your account also deletes them. You can also email us.</td></tr>
+</table>
+<p>For users in the EEA and UK, our legal basis for keeping a shared photo is your consent. Withdrawing it does not affect processing done before. Please share only photos that show books, with no people, names, addresses or documents.</p>
 
 <h2>Permissions</h2>
 <ul>
@@ -38,10 +51,10 @@
 <p>Data is encrypted in transit (HTTPS). Access to each library is restricted by database rules: you can read your own data and your household's; people you share with can only read your library, request to borrow, and claim wishlist gifts.</p>
 
 <h2>Sharing with other people</h2>
-<p>What you share is your choice. When you share your library with someone by email, they can see your books, including the status, rating and notes shown on a book. Household members can view and edit the shared household library. You can stop sharing at any time.</p>
+<p>What you share is your choice. When you share your library with someone by email, they can see your books, including the status, rating and who has borrowed them, and your wishlist. They cannot see your notes. Household members can view and edit the shared household library, including the notes. You can stop sharing at any time.</p>
 
 <h2>Retention and deletion</h2>
-<p>We keep your data while your account exists. You can delete your account at any time inside the app: <em>Settings &rarr; Delete my account</em>. This permanently removes your profile, books, groups, wishlist, shares, borrow requests and gift claims from our servers. A household you created is deleted for its members as well. You can also request deletion by email; see <a href="delete-account.html">how to delete your account</a>. Copies may remain for a limited time in the backups and logs of our service providers.</p>
+<p>We keep your data while your account exists, except shared shelf photos, which are deleted after 12 months at the latest. You can delete your account at any time inside the app: <em>Settings &rarr; Delete my account</em>. This permanently removes your profile, books, groups, wishlist, shares, borrow requests, gift claims and any shelf photos you shared from our servers. A household you created is deleted for its members as well. You can also request deletion by email; see <a href="delete-account.html">how to delete your account</a>. Copies may remain for a limited time in the backups and logs of our service providers.</p>
 
 <h2>Your rights</h2>
 <p>You may ask us for a copy of your data, to correct it, or to delete it, by emailing us. Depending on where you live (for example the EU/UK under GDPR, or California under CCPA) you may have additional rights, which we will honour.</p>
